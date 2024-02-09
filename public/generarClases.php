@@ -10,7 +10,7 @@ try {
     // Configuración para la generación de la clase PHP
     $config = new Config([
         'inputFile' => '../servidorSoap/servicio.wsdl', // Ruta al archivo WSDL
-        'outputDir' => 'src/Clases1/', // Directorio de salida para la clase generada
+        'outputDir' => '../src/Clases1', // Directorio de salida para la clase generada
     ]);
 
     // Generar la clase PHP

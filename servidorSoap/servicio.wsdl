@@ -1,155 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definitions
-    name="Operaciones"
-    targetNamespace="http://localhost/servidorSoap/servicioW.php"
-    xmlns:tns="http://localhost/servidorSoap/servicioW.php"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/"
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    xmlns="http://schemas.xmlsoap.org/wsdl/"
->
-    <types>
-        <schema targetNamespace="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.w3.org/2000/10/XMLSchema">
-            <element name="familiasType">
-                <complexType >
-                    <sequence>
-                        <element name="familia" type="string" minOccurs="0" maxOccurs="unbounded"/>
-                    </sequence>
-                </complexType>    
-            </element>
-            
-            <element name="productosType">
-                <complexType >
-                    <sequence>
-                        <element name="productos" type="string" minOccurs="0" maxOccurs="unbounded"/>
-                    </sequence>
-                </complexType>    
-            </element>          
-        </schema>
-    </types>
-    <message name="getPVPRequest">
-        <part name="producto" type="xsd:int" />
-    </message>
-    <message name="getPVPResponse">
-        <part name="return" type="xsd:float" />
-    </message>
-
-    <message name="getStockRequest">
-        <part name="producto" type="xsd:int" />
-        <part name="tienda" type="xsd:int" />
-    </message>
-    <message name="getStockResponse">
-        <part name="return" type="xsd:int" />
-    </message>
-
-    <message name="getFamiliasRequest" />
-    <message name="getFamiliasResponse">
-        <part name="familias" type="tns:familiasType"/>
-    </message>
-
-    <message name="getProductosFamiliaRequest">
-        <part name="familia" type="xsd:string" />
-    </message>
-    <message name="getProductosFamiliaResponse">
-        <part name="productos" type="tns:productosType"/>
-    </message>
-
-    <portType name="OperacionesPortType">
-        <operation name="getPVP">
-            <input message="tns:getPVPRequest" />
-            <output message="tns:getPVPResponse" />
-        </operation>
-
-        <operation name="getStock">
-            <input message="tns:getStockRequest" />
-            <output message="tns:getStockResponse" />
-        </operation>
-
-        <operation name="getFamilias">
-            <input message="tns:getFamiliasRequest" />
-            <output message="tns:getFamiliasResponse" />
-        </operation>
-
-        <operation name="getProductosFamilia">
-            <input message="tns:getProductosFamiliaRequest" />
-            <output message="tns:getProductosFamiliaResponse" />
-        </operation>
-    </portType>
-
-    <binding name="OperacionesBinding" type="tns:OperacionesPortType">
-        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-        <operation name="getPVP">
-            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getPVP" />
-            <input>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </input>
-            <output>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </output>
-        </operation>
-
-        <operation name="getStock">
-            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getStock" />
-            <input>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </input>
-            <output>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </output>
-        </operation>
-
-        <operation name="getFamilias">
-            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getFamilias" />
-            <input>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </input>
-            <output>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </output>
-        </operation>
-
-        <operation name="getProductosFamilia">
-            <soap:operation
-                soapAction="http://localhost/servidorSoap/servicioW.php#getProductosFamilia" />
-            <input>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </input>
-            <output>
-                <soap:body
-                    use="encoded"
-                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                    namespace="http://localhost/servidorSoap/servicioW.php" />
-            </output>
-        </operation>
-    </binding>
-
-    <service name="OperacionesService">
-        <port name="OperacionesPortType" binding="tns:OperacionesBinding">
-            <soap:address location="http://localhost/servidorSoap/servicioW.php" />
-        </port>
-    </service>
-
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/servidorSoap/servicioW.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="App.Clases1.Operaciones" targetNamespace="http://localhost/servidorSoap/servicioW.php">
+  <types>
+    <xsd:schema targetNamespace="http://localhost/servidorSoap/servicioW.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </xsd:schema>
+  </types>
+  <portType name="App.Clases1.OperacionesPort">
+    <operation name="getPVP">
+      <input message="tns:getPVPIn"/>
+      <output message="tns:getPVPOut"/>
+    </operation>
+    <operation name="getStock">
+      <documentation>M&#xE9;todo para obtener el stock de un producto en una tienda.</documentation>
+      <input message="tns:getStockIn"/>
+      <output message="tns:getStockOut"/>
+    </operation>
+    <operation name="getFamilias">
+      <documentation>M&#xE9;todo para obtener los c&#xF3;digos de todas las familias existentes.</documentation>
+      <input message="tns:getFamiliasIn"/>
+      <output message="tns:getFamiliasOut"/>
+    </operation>
+    <operation name="getProductosFamilia">
+      <documentation>M&#xE9;todo para obtener los c&#xF3;digos de todos los productos de una familia.</documentation>
+      <input message="tns:getProductosFamiliaIn"/>
+      <output message="tns:getProductosFamiliaOut"/>
+    </operation>
+  </portType>
+  <binding name="App.Clases1.OperacionesBinding" type="tns:App.Clases1.OperacionesPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getPVP">
+      <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getPVP"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </output>
+    </operation>
+    <operation name="getStock">
+      <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getStock"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </output>
+    </operation>
+    <operation name="getFamilias">
+      <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getFamilias"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </output>
+    </operation>
+    <operation name="getProductosFamilia">
+      <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getProductosFamilia"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/servidorSoap/servicioW.php"/>
+      </output>
+    </operation>
+  </binding>
+  <message name="getPVPIn">
+    <part name="producto" type="xsd:int"/>
+  </message>
+  <message name="getPVPOut">
+    <part name="return" type="xsd:float"/>
+  </message>
+  <message name="getStockIn">
+    <part name="producto" type="xsd:int"/>
+    <part name="tienda" type="xsd:int"/>
+  </message>
+  <message name="getStockOut">
+    <part name="return" type="xsd:int"/>
+  </message>
+  <message name="getFamiliasIn"/>
+  <message name="getFamiliasOut">
+    <part name="return" type="soap-enc:Array"/>
+  </message>
+  <message name="getProductosFamiliaIn">
+    <part name="familia" type="xsd:string"/>
+  </message>
+  <message name="getProductosFamiliaOut">
+    <part name="return" type="soap-enc:Array"/>
+  </message>
+  <service name="App.Clases1.OperacionesService">
+    <port name="App.Clases1.OperacionesPort" binding="tns:App.Clases1.OperacionesBinding">
+      <soap:address location="http://localhost/servidorSoap/servicioW.php"/>
+    </port>
+  </service>
 </definitions>

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'juan/tarea06',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '4398588ce87a3e5b8fc9c4640dfdd85d2ec5aad3',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'juan/tarea06' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '4398588ce87a3e5b8fc9c4640dfdd85d2ec5aad3',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

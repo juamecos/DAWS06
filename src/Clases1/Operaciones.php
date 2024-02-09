@@ -28,7 +28,7 @@ class Operaciones
      * 
      * @param int $producto id de producto
      * 
-     * @return float|null Precio de venta al público del producto.
+     * @return float Precio de venta al público del producto.
      */
     public function getPVP($producto)
     {
@@ -38,7 +38,7 @@ class Operaciones
 
         } catch(PDOException $e) {
             error_log('Error: ' . $e->getMessage());
-            return null;
+            return -1;
         }
     }
 
@@ -49,7 +49,7 @@ class Operaciones
      * @param int $producto ID del producto.
      * @param int $tienda   ID de la tienda.
      * 
-     * @return int|null Retorna el stock del producto o null si no se encuentra.
+     * @return int Retorna el stock del producto o null si no se encuentra.
      */
 
     public function getStock($producto, $tienda)
@@ -60,7 +60,7 @@ class Operaciones
             return $stockInfo ? $stockInfo : null;
         } catch (PDOException $e) {
             error_log('Error: ' . $e->getMessage());
-            return null;
+            return -1;
         }
     }
 
