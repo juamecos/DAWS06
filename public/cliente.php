@@ -17,10 +17,10 @@ try {
 
 
 // Llamamos a los métodos del servicio SOAP
-$PVP = $cliente->__soapCall('getPVP', array('producto' => 1));
-$stock = $cliente->__soapCall('getStock', array('producto' => 1, 'tienda' => 1));
+$PVP = $cliente->__soapCall('getPVP', array('producto' => "3DSNG"));
+$stock = $cliente->__soapCall('getStock', array('producto' => "ACERAX3950", 'tienda' => "CENTRAL"));
 $familias = $cliente->__soapCall('getFamilias', []);
-$productos = $cliente->__soapCall('getProductosFamilia', array('familia' => "CAMARA"));
+$productos = $cliente->__soapCall('getProductosFamilia', array('familia' => "CONSOL"));
 
 // Imprimimos los resultados de las llamadas
 ?>
@@ -36,18 +36,47 @@ $productos = $cliente->__soapCall('getProductosFamilia', array('familia' => "CAM
 </head>
 <body>
     <div class="container mt-3">
-        <h1>Resultados SOAP sin WSDL </h1>
-        <h2>Resultado de getPVP</h2>
-        <pre><?php print_r($PVP); ?></pre>
+        <h1 class="mb-4">Resultados SOAP sin WSDL</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Resultado de getPVP</h2>
+                <pre><?php echo $PVP; ?></pre>
+            </div>
+            <div class="col-md-6">
+                <h2>Resultado de getStock</h2>
+                <pre><?php echo $stock; ?></pre>
+            </div>
+        </div>
+
         <hr>
-        <h2>Resultado de getStock</h2>
-        <pre><?php print_r($stock); ?></pre>
-        <hr>
-        <h2>Resultado de getFamilias</h2>
-        <pre><?php print_r($familias); ?></pre>
-        <hr>
-        <h2>Resultado de getProductosFamilia</h2>
-        <pre><?php print_r($productos); ?></pre>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Resultado de getFamilias</h2>
+                <?php if (!empty($familias)) : ?>
+                    <ul>
+                        <?php foreach ($familias as $familia) : ?>
+                            <li><?php echo $familia; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else : ?>
+                    <p>No se encontraron familias.</p>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-6">
+                <h2>Resultado de getProductosFamilia</h2>
+                <?php if (!empty($productos)) : ?>
+                    <ul>
+                        <?php foreach ($productos as $producto) : ?>
+                            <li><?php echo $producto; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else : ?>
+                    <p>No se encontraron productos para la familia especificada.</p>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 </body>
 </html>

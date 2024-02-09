@@ -66,14 +66,14 @@
     </operation>
   </binding>
   <message name="getPVPIn">
-    <part name="producto" type="xsd:int"/>
+    <part name="producto" type="xsd:string"/>
   </message>
   <message name="getPVPOut">
     <part name="return" type="xsd:float"/>
   </message>
   <message name="getStockIn">
-    <part name="producto" type="xsd:int"/>
-    <part name="tienda" type="xsd:int"/>
+    <part name="producto" type="xsd:string"/>
+    <part name="tienda" type="xsd:string"/>
   </message>
   <message name="getStockOut">
     <part name="return" type="xsd:int"/>
