@@ -30,30 +30,30 @@ class AppClases1OperacionesService extends \SoapClient
     }
 
     /**
-     * @param int $producto
+     * @param string $producto
      * @return float
      */
     public function getPVP($producto)
     {
-      return $this->__soapCall('getPVP', array($producto));
+      return $this->__soapCall('getPVP', array('producto' => $producto));
     }
 
     /**
      * Método para obtener el stock de un producto en una tienda.
      *
-     * @param int $producto
-     * @param int $tienda
+     * @param string $producto
+     * @param string $tienda
      * @return int
      */
     public function getStock($producto, $tienda)
     {
-      return $this->__soapCall('getStock', array($producto, $tienda));
+      return $this->__soapCall('getStock', array('producto' => $producto, 'tienda' => $tienda));
     }
 
     /**
      * Método para obtener los códigos de todas las familias existentes.
      *
-     * @return Array
+     * @return array
      */
     public function getFamilias()
     {
@@ -64,7 +64,7 @@ class AppClases1OperacionesService extends \SoapClient
      * Método para obtener los códigos de todos los productos de una familia.
      *
      * @param string $familia
-     * @return Array
+     * @return array
      */
     public function getProductosFamilia($familia)
     {

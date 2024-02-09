@@ -74,8 +74,8 @@ class Stock
     /**
      * Obtiene el stock de un producto en una tienda.
      * 
-     * @param int $producto  Código identificativo del producto.
-     * @param int $tienda    Código identificativo de la tienda.
+     * @param string $producto  Código identificativo del producto.
+     * @param string $tienda    Código identificativo de la tienda.
      * 
      * @return int|null Retorna el stock del producto o null si no se encuent
      */
@@ -83,10 +83,15 @@ class Stock
      public function obtenerStockProductoTienda($producto, $tienda) {
         try {
             $conexion = $this->conexion->obtenerConexion();
-            $query = "SELECT unidades FROM stocks WHERE producto = :producto AND tienda = :tienda";
+            $query = "SELECT s.unidades
+            FROM stocks s
+            INNER JOIN productos p ON s.producto = p.id
+            INNER JOIN tiendas t ON s.tienda = t.id
+            WHERE p.nombre_corto = '$producto'
+            AND t.nombre = '$tienda'";
             $stmt = $conexion->prepare($query);
-            $stmt->bindParam(':producto', $producto, PDO::PARAM_INT);
-            $stmt->bindParam(':tienda', $tienda, PDO::PARAM_INT);
+            $stmt->bindParam(':producto', $producto, PDO::PARAM_STR);
+            $stmt->bindParam(':tienda', $tienda, PDO::PARAM_STR);
             $stmt->execute();
             $stock = $stmt->fetchColumn();
             return $stock;

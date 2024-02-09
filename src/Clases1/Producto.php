@@ -77,7 +77,8 @@ class Producto
      *
      * @param int $id ID del producto.
      *
-     * @return array|null Retorna un array asociativo con la información del producto o null si no se encuentra.
+     * @return array|null Retorna un array asociativo con la información del PVP del producto 
+     * o null si no se encuentra.
      */
     public function obtenerProductoPorID($id)
     {
@@ -96,20 +97,54 @@ class Producto
     }
 
     /**
-     * Obtiene los códigos de los productos de una familia.
+     * Obtiene un producto específico por su código.
      * 
-     * @param string $familia Nombre de la familia.
+     * @param string $nombre_corto Nombre corto del producto.
      * 
-     * @return array Retorna un array asociativo con los nombre_corto de los productos de la fam
+     * @return array|null Retorna un array asociativo con la información del producto 
+     * o null si no se encuentra.
      */
 
-     public function obtenerProductosPorFamilia($familia)
+     public function obtenerProductoPorNombreCorto($nombre_corto)
+    {
+
+        try {
+            $conexion = $this->conexion->obtenerConexion();
+            $query = "SELECT * FROM productos WHERE nombre_corto = :nombre_corto";
+            $stmt = $conexion->prepare($query);
+            $stmt->bindParam(':nombre_corto', $nombre_corto);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: ". $e->getMessage();
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene los códigos de los productos de una familia.
+     * 
+     * @param string $cod Código de la familia.
+     * 
+     * @return array Retorna un array con los nombre_corto de los productos de la fam
+     */
+
+     public function obtenerProductosPorFamilia($cod)
     {
         try {
             $conexion = $this->conexion->obtenerConexion();
-            $query = "SELECT nombre_corto FROM productos WHERE familia = :familia";
+            $query = "
+            SELECT p.nombre_corto 
+            FROM productos p
+            JOIN familias f
+            ON p.familia = f.cod
+            WHERE f.cod = :cod            
+            ";
             $stmt = $conexion->prepare($query);
-            $stmt->bindParam(':familia', $familia);
+            $stmt->bindParam(':cod', $cod);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_COLUMN);
         } catch (PDOException $e) {

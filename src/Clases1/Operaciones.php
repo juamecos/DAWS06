@@ -26,14 +26,14 @@ class Operaciones
     /**
      * @soap
      * 
-     * @param int $producto id de producto
+     * @param string $producto código del producto
      * 
-     * @return float Precio de venta al público del producto.
+     * @return float Precio de venta al público del producto. Error -1
      */
     public function getPVP($producto)
     {
         try {
-            $productoInfo = $this->producto->obtenerProductoPorID($producto);
+            $productoInfo = $this->producto->obtenerProductoPorNombreCorto($producto);
             return $productoInfo['pvp'];
 
         } catch(PDOException $e) {
@@ -46,8 +46,8 @@ class Operaciones
      * Método para obtener el stock de un producto en una tienda.
      * @soap
      * 
-     * @param int $producto ID del producto.
-     * @param int $tienda   ID de la tienda.
+     * @param string $producto nombre_corto  del producto.
+     * @param string $tienda   nombre de la tienda.
      * 
      * @return int Retorna el stock del producto o null si no se encuentra.
      */
@@ -57,7 +57,7 @@ class Operaciones
         try {
             $stockInfo = $this->stock->obtenerStockProductoTienda($producto, $tienda);
 
-            return $stockInfo ? $stockInfo : null;
+            return $stockInfo;
         } catch (PDOException $e) {
             error_log('Error: ' . $e->getMessage());
             return -1;
@@ -88,7 +88,7 @@ class Operaciones
      * 
      * @soap
      * 
-     * @param string $familia Nombre de la familia.
+     * @param string $familia Código de la familia. Ex. "CONSOL"
      * 
      * @return array Retorna un array con los codigos de los productos de una familia
      */
