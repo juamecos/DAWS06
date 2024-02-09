@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    name="Operaciones"
+    targetNamespace="http://localhost/servidorSoap/servicioW.php"
+    xmlns:tns="http://localhost/servidorSoap/servicioW.php"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+>
+    <types>
+        <schema targetNamespace="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.w3.org/2000/10/XMLSchema">
+            <element name="familiasType">
+                <complexType >
+                    <sequence>
+                        <element name="familia" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>    
+            </element>
+            
+            <element name="productosType">
+                <complexType >
+                    <sequence>
+                        <element name="productos" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>    
+            </element>          
+        </schema>
+    </types>
+    <message name="getPVPRequest">
+        <part name="producto" type="xsd:int" />
+    </message>
+    <message name="getPVPResponse">
+        <part name="return" type="xsd:float" />
+    </message>
+
+    <message name="getStockRequest">
+        <part name="producto" type="xsd:int" />
+        <part name="tienda" type="xsd:int" />
+    </message>
+    <message name="getStockResponse">
+        <part name="return" type="xsd:int" />
+    </message>
+
+    <message name="getFamiliasRequest" />
+    <message name="getFamiliasResponse">
+        <part name="familias" type="tns:familiasType"/>
+    </message>
+
+    <message name="getProductosFamiliaRequest">
+        <part name="familia" type="xsd:string" />
+    </message>
+    <message name="getProductosFamiliaResponse">
+        <part name="productos" type="tns:productosType"/>
+    </message>
+
+    <portType name="OperacionesPortType">
+        <operation name="getPVP">
+            <input message="tns:getPVPRequest" />
+            <output message="tns:getPVPResponse" />
+        </operation>
+
+        <operation name="getStock">
+            <input message="tns:getStockRequest" />
+            <output message="tns:getStockResponse" />
+        </operation>
+
+        <operation name="getFamilias">
+            <input message="tns:getFamiliasRequest" />
+            <output message="tns:getFamiliasResponse" />
+        </operation>
+
+        <operation name="getProductosFamilia">
+            <input message="tns:getProductosFamiliaRequest" />
+            <output message="tns:getProductosFamiliaResponse" />
+        </operation>
+    </portType>
+
+    <binding name="OperacionesBinding" type="tns:OperacionesPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="getPVP">
+            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getPVP" />
+            <input>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </input>
+            <output>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </output>
+        </operation>
+
+        <operation name="getStock">
+            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getStock" />
+            <input>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </input>
+            <output>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </output>
+        </operation>
+
+        <operation name="getFamilias">
+            <soap:operation soapAction="http://localhost/servidorSoap/servicioW.php#getFamilias" />
+            <input>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </input>
+            <output>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </output>
+        </operation>
+
+        <operation name="getProductosFamilia">
+            <soap:operation
+                soapAction="http://localhost/servidorSoap/servicioW.php#getProductosFamilia" />
+            <input>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </input>
+            <output>
+                <soap:body
+                    use="encoded"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                    namespace="http://localhost/servidorSoap/servicioW.php" />
+            </output>
+        </operation>
+    </binding>
+
+    <service name="OperacionesService">
+        <port name="OperacionesPortType" binding="tns:OperacionesBinding">
+            <soap:address location="http://localhost/servidorSoap/servicioW.php" />
+        </port>
+    </service>
+
+</definitions>

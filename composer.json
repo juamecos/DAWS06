@@ -1,0 +1,23 @@
+{
+    "name": "juan/tarea06",
+    "description": "Proyecto para la tarea 6 de DWES",
+    "type": "project",
+    "license": "GLP",
+    "authors": [
+        {
+            "name": "Juan José mena Costa"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php2wsdl/php2wsdl": "^0.7.0",
+        "wsdl2phpgenerator/wsdl2phpgenerator": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
